@@ -1,0 +1,16 @@
+case,expected,n,accepted,rejecting_condition,median_us,p95_us
+"Valid reading, calibration, model",accept,1000,1000,-,200.1,247.9
+"Approved calibration in a separate lineage (B, v2 < A v8)",accept,1000,1000,-,200.3,228.6
+Replay of an accepted transaction,reject,1000,0,Fresh (1000),197.9,209.5
+Unissued or reused nonce,reject,1000,0,Fresh (1000),199.7,220.2
+Revoked calibration,reject,1000,0,not revoked (1000),199.7,215.5
+"Calibration rollback (v5 after v8, same lineage)",reject,1000,0,version >= max (1000),199.6,204.9
+Incompatible model version,reject,1000,0,"(D,C,M) in Pi (1000)",199.6,223.0
+Unapproved acquisition configuration (signed),reject,1000,0,A in Gamma (1000),199.4,204.5
+Acquisition configuration altered after signing,reject,1000,0,Vf (1000),200.0,204.7
+Reading digest altered after signing,reject,1000,0,Vf (1000),200.0,206.2
+Inference output altered after signing,reject,1000,0,Vf (1000),200.3,229.0
+Unauthorized firmware (attested honestly),reject,1000,0,F in Phi (1000),201.2,207.2
+Certified key not bound to attested firmware,reject,1000,0,Bind (1000),131.0,134.2
+Different protocol domain label,reject,1000,0,Vf (1000),200.3,217.6
+Delayed out-of-order valid transaction (strict counter),reject,1000,0,counter > max (1000),199.4,206.5

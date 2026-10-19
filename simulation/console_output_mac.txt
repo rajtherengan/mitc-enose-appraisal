@@ -1,0 +1,32 @@
+$ N=1000 python3 run_experiment.py
+ABL {'case': 'Replay of an accepted transaction', 'disabled_condition': 'Fresh', 'n': 200, 'accepted_when_disabled': 0, 'next_catching_condition': 'counter > max'}
+ABL {'case': 'Unissued or reused nonce', 'disabled_condition': 'Fresh', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Revoked calibration', 'disabled_condition': 'not revoked', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Calibration rollback (v5 after v8, same lineage)', 'disabled_condition': 'version >= max', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Incompatible model version', 'disabled_condition': '(D,C,M) in Pi', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Unapproved acquisition configuration (signed)', 'disabled_condition': 'A in Gamma', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Acquisition configuration altered after signing', 'disabled_condition': 'Vf', 'n': 200, 'accepted_when_disabled': 0, 'next_catching_condition': 'A in Gamma'}
+ABL {'case': 'Reading digest altered after signing', 'disabled_condition': 'Vf', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Inference output altered after signing', 'disabled_condition': 'Vf', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Unauthorized firmware (attested honestly)', 'disabled_condition': 'F in Phi', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Certified key not bound to attested firmware', 'disabled_condition': 'Bind', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Domain label altered after signing', 'disabled_condition': 'Vf', 'n': 200, 'accepted_when_disabled': 0, 'next_catching_condition': 'delta in Delta'}
+ABL {'case': 'Correctly signed in a disallowed context', 'disabled_condition': 'delta in Delta', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+ABL {'case': 'Delayed out-of-order valid transaction (strict counter)', 'disabled_condition': 'counter > max', 'n': 200, 'accepted_when_disabled': 200, 'next_catching_condition': '-'}
+Valid reading, calibration, model                       exp=accept acc=1000/1000 ok=True cond=-                            med=200.2us p95=204.0us
+Approved calibration in a separate lineage (B, v2 < A v exp=accept acc=1000/1000 ok=True cond=-                            med=200.0us p95=204.7us
+Replay of an accepted transaction                       exp=reject acc=   0/1000 ok=True cond=Fresh (1000)                 med=197.8us p95=202.6us
+Unissued or reused nonce                                exp=reject acc=   0/1000 ok=True cond=Fresh (1000)                 med=199.3us p95=204.5us
+Revoked calibration                                     exp=reject acc=   0/1000 ok=True cond=not revoked (1000)           med=199.6us p95=204.7us
+Calibration rollback (v5 after v8, same lineage)        exp=reject acc=   0/1000 ok=True cond=version >= max (1000)        med=199.6us p95=204.9us
+Incompatible model version                              exp=reject acc=   0/1000 ok=True cond=(D,C,M) in Pi (1000)         med=199.5us p95=206.3us
+Unapproved acquisition configuration (signed)           exp=reject acc=   0/1000 ok=True cond=A in Gamma (1000)            med=199.4us p95=204.7us
+Acquisition configuration altered after signing         exp=reject acc=   0/1000 ok=True cond=Vf (1000)                    med=200.0us p95=204.4us
+Reading digest altered after signing                    exp=reject acc=   0/1000 ok=True cond=Vf (1000)                    med=200.1us p95=205.9us
+Inference output altered after signing                  exp=reject acc=   0/1000 ok=True cond=Vf (1000)                    med=200.1us p95=205.9us
+Unauthorized firmware (attested honestly)               exp=reject acc=   0/1000 ok=True cond=F in Phi (1000)              med=201.2us p95=208.1us
+Certified key not bound to attested firmware            exp=reject acc=   0/1000 ok=True cond=Bind (1000)                  med=130.8us p95=134.4us
+Domain label altered after signing                      exp=reject acc=   0/1000 ok=True cond=Vf (1000)                    med=200.0us p95=204.4us
+Correctly signed in a disallowed context                exp=reject acc=   0/1000 ok=True cond=delta in Delta (1000)        med=199.2us p95=203.4us
+Delayed out-of-order valid transaction (strict counter) exp=reject acc=   0/1000 ok=True cond=counter > max (1000)         med=199.2us p95=203.4us
+{'python': '3.14.7', 'cpu': 'arm', 'cryptography': '50.0.2', 'N_per_case': 1000, 'date': '2026-10-18', 'ed25519_verify_us': 62.9, 'ed25519_sign_us': 21.5, 'sha256_400B_us': 0.4, 'device_transaction_us': 35.7}

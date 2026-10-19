@@ -1,0 +1,17 @@
+case,property,expected,n,accepted,rejected,as_expected,rejecting_condition,median_us,p95_us
+"Valid reading, calibration, model",Baseline correctness,accept,1000,1000,0,True,-,200.2,204.0
+"Approved calibration in a separate lineage (B, v2 < A v8)",Lineage-scoped version checks,accept,1000,1000,0,True,-,200.0,204.7
+Replay of an accepted transaction,Freshness and replay protection,reject,1000,0,1000,True,Fresh (1000),197.8,202.6
+Unissued or reused nonce,Freshness,reject,1000,0,1000,True,Fresh (1000),199.3,204.5
+Revoked calibration,Calibration authorization,reject,1000,0,1000,True,not revoked (1000),199.6,204.7
+"Calibration rollback (v5 after v8, same lineage)",Rollback resistance,reject,1000,0,1000,True,version >= max (1000),199.6,204.9
+Incompatible model version,Model compatibility,reject,1000,0,1000,True,"(D,C,M) in Pi (1000)",199.5,206.3
+Unapproved acquisition configuration (signed),Configuration authorization,reject,1000,0,1000,True,A in Gamma (1000),199.4,204.7
+Acquisition configuration altered after signing,Configuration integrity,reject,1000,0,1000,True,Vf (1000),200.0,204.4
+Reading digest altered after signing,Reading integrity,reject,1000,0,1000,True,Vf (1000),200.1,205.9
+Inference output altered after signing,Result integrity,reject,1000,0,1000,True,Vf (1000),200.1,205.9
+Unauthorized firmware (attested honestly),Firmware authorization,reject,1000,0,1000,True,F in Phi (1000),201.2,208.1
+Certified key not bound to attested firmware,Key-to-attestation binding,reject,1000,0,1000,True,Bind (1000),130.8,134.4
+Domain label altered after signing,Context-label integrity,reject,1000,0,1000,True,Vf (1000),200.0,204.4
+Correctly signed in a disallowed context,Context authorization,reject,1000,0,1000,True,delta in Delta (1000),199.2,203.4
+Delayed out-of-order valid transaction (strict counter),Documented trade-off: false rejection,reject,1000,0,1000,True,counter > max (1000),199.2,203.4

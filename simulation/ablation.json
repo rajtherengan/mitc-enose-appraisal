@@ -1,0 +1,100 @@
+[
+ {
+  "case": "Replay of an accepted transaction",
+  "disabled_condition": "Fresh",
+  "n": 200,
+  "accepted_when_disabled": 0,
+  "next_catching_condition": "counter > max"
+ },
+ {
+  "case": "Unissued or reused nonce",
+  "disabled_condition": "Fresh",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Revoked calibration",
+  "disabled_condition": "not revoked",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Calibration rollback (v5 after v8, same lineage)",
+  "disabled_condition": "version >= max",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Incompatible model version",
+  "disabled_condition": "(D,C,M) in Pi",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Unapproved acquisition configuration (signed)",
+  "disabled_condition": "A in Gamma",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Acquisition configuration altered after signing",
+  "disabled_condition": "Vf",
+  "n": 200,
+  "accepted_when_disabled": 0,
+  "next_catching_condition": "A in Gamma"
+ },
+ {
+  "case": "Reading digest altered after signing",
+  "disabled_condition": "Vf",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Inference output altered after signing",
+  "disabled_condition": "Vf",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Unauthorized firmware (attested honestly)",
+  "disabled_condition": "F in Phi",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Certified key not bound to attested firmware",
+  "disabled_condition": "Bind",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Domain label altered after signing",
+  "disabled_condition": "Vf",
+  "n": 200,
+  "accepted_when_disabled": 0,
+  "next_catching_condition": "delta in Delta"
+ },
+ {
+  "case": "Correctly signed in a disallowed context",
+  "disabled_condition": "delta in Delta",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ },
+ {
+  "case": "Delayed out-of-order valid transaction (strict counter)",
+  "disabled_condition": "counter > max",
+  "n": 200,
+  "accepted_when_disabled": 200,
+  "next_catching_condition": "-"
+ }
+]
